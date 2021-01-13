@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.16.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.EventCounterCollector" Version="2.16.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
   </ItemGroup>
 
 </Project>

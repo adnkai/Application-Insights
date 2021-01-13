@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.ApplicationInsights;
+using System.Threading;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Net.Http.Formatting;
+using Newtonsoft.Json.Linq;
 
 namespace WebApp.Pages
 {
@@ -22,12 +28,23 @@ namespace WebApp.Pages
         public void OnGet()
         {
           this.telemetry.TrackEvent("HomePageRequested");
-          if (new Random().Next(1,3) == 1) {
+          GetBTCValue();
+          if (@RouteData.Values["raise"] != null) {
+            this.telemetry.TrackEvent("ManuallyRaisedException");
             RaiseException();
           }
         }
+        
         public void RaiseException(){
           throw(new Exception());
         }
+
+        public void GetBTCValue() {
+          var client = new HttpClient();
+          string btcData = client.GetStringAsync("https://blockchain.info/ticker").Result;
+          this.telemetry.TrackEvent("FetchedData");
+          ViewData["btc"] = btcData;
+        }
+
     }
 }

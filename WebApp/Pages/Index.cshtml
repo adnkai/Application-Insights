@@ -1,11 +1,41 @@
-﻿@page
+﻿@page "/{raise?}"
 @model IndexModel
 @using System
+@using Newtonsoft.Json.Linq
 @{
     ViewData["Title"] = "Home page";
+    String btcData = ViewData["btc"].ToString();
+    JObject j = JObject.Parse(btcData);
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Application Insights Test Page</h1>
+    <a href="/raise">Raise Exception</a>
+</div>
+<div class="BtcTableWrapper">
+<table class="BtcTable">
+  <thead>
+    <th>Currency</th>
+    <th>15 Min</th>
+    <th>Last</th>
+    <th>Buy</th>
+    <th>Sell</th>
+    <th>Symbol</th>
+  </thead>
+  <tbody>
+    
+    @foreach (var item in j)
+    { 
+      JObject values = JObject.Parse(@item.Value.ToString());
+      <tr>
+        <td class="Currency">@item.Key</td>
+        @foreach (var val in values)
+        {
+          <td class="Value">@val.Value</td>
+        }
+      </tr> 
+    }
+    
+  </tbody>
+</table>
 </div>
