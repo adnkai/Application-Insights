@@ -133,7 +133,7 @@
         "location": "[parameters('location')]",
         "tags": {},
         "properties": {
-            "ApplicationId": "[parameters('name')]",
+            "ApplicationId": "[parameters('siteName')]",
             "Request_Source": "IbizaWebAppExtensionCreate"
         }
       }
