@@ -91,11 +91,11 @@
               "appSettings": [
                    {
                         "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                        "value": "[reference(concat('microsoft.insights/components/', [parameters('siteName')]), '2015-05-01').InstrumentationKey]"
+                        "value": "[reference(concat('microsoft.insights/components/', parameters('siteName')), '2015-05-01').InstrumentationKey]"
                     },
                     {
                         "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                        "value": "[reference(concat('microsoft.insights/components/', [parameters('siteName')]), '2015-05-01').ConnectionString]"
+                        "value": "[reference(concat('microsoft.insights/components/', parameters('siteName')), '2015-05-01').ConnectionString]"
                     },
                     {
                         "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
