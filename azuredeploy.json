@@ -82,11 +82,30 @@
         },
         "location": "[parameters('location')]",
         "dependsOn": [
-          "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+          "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
+          "[resourceId('Microsoft.Insights/Components', parameters('siteName'))]"
         ],
         "properties": {
           "serverFarmId": "[parameters('hostingPlanName')]",
           "siteConfig": {
+              "appSettings": [
+                   {
+                        "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                        "value": "[reference(concat('microsoft.insights/components/', [parameters('siteName')]), '2015-05-01').InstrumentationKey]"
+                    },
+                    {
+                        "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+                        "value": "[reference(concat('microsoft.insights/components/', [parameters('siteName')]), '2015-05-01').ConnectionString]"
+                    },
+                    {
+                        "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+                        "value": "~2"
+                    },
+                    {
+                        "name": "XDT_MicrosoftApplicationInsights_Mode",
+                        "value": "default"
+                    }
+              ]
             "webSocketsEnabled": true         
           },
           "httpsOnly":true
@@ -106,6 +125,17 @@
             }
           }
         ]
+      },
+      {
+        "apiVersion": "2015-05-01",
+        "name": "[parameters('siteName')]",
+        "type": "microsoft.insights/components",
+        "location": "[parameters('location')]",
+        "tags": {},
+        "properties": {
+            "ApplicationId": "[parameters('name')]",
+            "Request_Source": "IbizaWebAppExtensionCreate"
+        }
       }
     ],
     "outputs": {
