@@ -105,7 +105,7 @@
                         "name": "XDT_MicrosoftApplicationInsights_Mode",
                         "value": "default"
                     }
-              ]
+              ],
             "webSocketsEnabled": true         
           },
           "httpsOnly":true
