@@ -26,6 +26,9 @@ jobs:
     - name: Clean
       run: dotnet clean ./WebApp/ --configuration Release && dotnet nuget locals all --clear
 
+    - name: Restore with dotnet
+      run: dotnet restore ./WebApp/
+
     - name: Build with dotnet
       run: dotnet build ./WebApp/ --configuration Release
 
