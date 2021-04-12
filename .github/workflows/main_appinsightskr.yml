@@ -24,7 +24,7 @@ jobs:
         dotnet-version: '5.0.x'
 
     - name: Clean
-      run: dotnet clean ./WebApp/ --configuration Release && dotnet nuget locals all --clear
+      run: dotnet clean ./WebApp/ && dotnet nuget locals all --clear
 
     - name: Restore with dotnet
       run: dotnet restore ./WebApp/
