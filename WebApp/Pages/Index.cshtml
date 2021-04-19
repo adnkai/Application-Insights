@@ -5,7 +5,8 @@
 @{
     ViewData["Title"] = "Home page";
     String btcData = ViewData["btc"].ToString();
-    JObject j = JObject.Parse(btcData);
+    JObject btc = JObject.Parse(btcData);
+    JObject doge = JObject.Parse(dogeData);
 }
 
 <div class="text-center">
@@ -24,7 +25,31 @@
   </thead>
   <tbody>
     
-    @foreach (var item in j)
+    @foreach (var item in btc)
+    { 
+      JObject values = JObject.Parse(@item.Value.ToString());
+      <tr>
+        <td class="Currency">@item.Key</td>
+        @foreach (var val in values)
+        {
+          <td class="Value">@val.Value</td>
+        }
+      </tr> 
+    }
+    
+  </tbody>
+</table>
+    <h2>Such wow!</h2>
+    <table class="BtcTable">
+  <thead>
+    <th>Buy</th>
+    <th>Currency</th>
+    <th>Exchange</th>
+    <th>Time</th>
+  </thead>
+  <tbody>
+    
+    @foreach (var item in doge['prices'])
     { 
       JObject values = JObject.Parse(@item.Value.ToString());
       <tr>
