@@ -42,9 +42,16 @@ namespace WebApp.Pages
         public void GetBTCValue() {
           var client = new HttpClient();
           string btcData = client.GetStringAsync("https://blockchain.info/ticker").Result;
-          this.telemetry.TrackEvent("FetchedData");
+          this.telemetry.TrackEvent("FetchedData_BTC");
           ViewData["btc"] = btcData;
         }
-
+        
+        // Such wow!
+        public void GetDOGEValue() {
+          var client = new HttpClient();
+          string dogeData = client.GetStringAsync("https://sochain.com/api/v2/get_price/DOGE").Result;
+          this.telemetry.TrackEvent("FetchedData_Doge");
+          ViewData["doge"] = dogeData;
+        }
     }
 }
